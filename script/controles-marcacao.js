@@ -39,3 +39,24 @@ marcacoes.forEach(marcacao => {
         atualizaControles(marcacao);
     });
 });
+
+function atualizaMarcacao() {
+    const selecionada = document.querySelector('.marcacao.selecionada');
+    if (!selecionada) return;
+
+    selecionada.style.left = document.querySelector('#x-da-marcacao').value + 'px';
+    selecionada.style.top = document.querySelector('#y-da-marcacao').value + 'px';
+    selecionada.style.width = document.querySelector('#largura-da-marcacao').value + 'px';
+    selecionada.style.height = document.querySelector('#altura-da-marcacao').value + 'px';
+
+    selecionada.dataset.titulo = document.querySelector('#titulo-da-marcacao').value;
+    selecionada.dataset.conteudo = document.querySelector('#conteudo-da-marcacao').value;
+    selecionada.dataset.cor = document.querySelector('#cor-da-marcacao').value;
+
+    const formato = document.querySelector('input[name="formato-da-marcacao"]:checked').value;
+    selecionada.classList.remove('formato-oval', 'formato-retangular');
+    selecionada.classList.add(formato);
+}
+
+const campos = document.querySelectorAll('input:not([type="checkbox"]), textarea');
+campos.forEach(campo => campo.addEventListener('input', atualizaMarcacao));
